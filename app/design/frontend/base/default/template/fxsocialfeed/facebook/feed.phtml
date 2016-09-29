@@ -1,0 +1,113 @@
+<?php
+$title = $this->getData('widget_title');
+$class = $this->getData('classes');
+$width = $this->getData('width');
+if(!strpos($width,'px') && !strpos($width,'%') && $width!='auto') $width = $width . 'px';
+$height = $this->getData('height');
+if(!strpos($height,'px') && !strpos($height,'%') && $height!='auto') $height = $height . 'px';
+$bg_color = $this->getData('background_color');
+$limit = $this->getData('num_of_photos');
+$cols = $this->getData('column');
+$show_header = $this->getData('show_header');
+$padding = $this->getData('padding');
+if(!strpos($padding,'px') && !strpos($padding,'%')) $padding = $padding . 'px';
+$show_btn_follow = $this->getData('show_btn_folow');
+$btn_follow_label = $this->getData('btn_folow');
+$show_like = $this->getData('show_like');
+$show_comment = $this->getData('show_comment');
+$show_caption = $this->getData('show_caption');
+$style = "width : " . $width . ";height : " . $height . ";background-color: " . $bg_color . ";";
+
+$facebook = $this->initFB();
+
+$pageID = $this->getFBPageId();
+$pageData = $this->getFBPageData();
+$feedData = $this->setLimit($limit)->getFBFeedData();
+
+if($pageData) { ?>
+<div id="sb_facebook" class="typo-insta <?php echo $class ?> sbi sbi_col_<?php echo $cols;?>" style="<?php echo $style ?>">
+    <?php if(!empty($title)): ?>
+    <div class="title"><h2><?php echo $title;?></h2></div>
+    <?php endif;?>
+    <?php if($show_header) : ?>
+	    <div class="sb_facebook_header">
+		    <a href="<?php echo $pageData['link']; ?>" target="_blank" title="<?php echo $pageData['name']?>" class="sbi_header_link">
+			    <div class="sbi_header_text">
+				    <h3 class="sbi_no_bio"><?php echo $pageData['name']?></h3>
+			    </div>
+			    <?php if (isset($pageData['picture']['data']['url'])) : ?>
+			    <div class="sbi_header_img">
+				    <div class="sbi_header_img_hover">
+					    <i class="fa fa-facebook-official"></i>
+				    </div>
+				    <img src="<?php echo $pageData['picture']['data']['url']; ?>" alt="<?php echo $pageData['name']?>" width="50" height="50">
+			    </div>
+		        <?php endif; ?>
+		    </a>
+	    </div>
+    <?php endif; ?>
+    <div id="sbf_images" style="padding: <?php echo $padding;?>">
+        <?php foreach($feedData['data'] as $post) :
+	        $likesCount = isset($post['likes']['summary']['total_count']) ? $post['likes']['summary']['total_count'] : 0;
+	        $commentsCount = isset($post['comments']['summary']['total_count']) ? $post['comments']['summary']['total_count'] : 0;
+	        // parse post ID in string like {userID}_{postId}
+	        $postId = substr($post['id'], -strpos($post['id'], '_')-1);
+        ?>
+            <div class="sbi_item sbi_type_image">
+                <div class="sbi_photo_wrap">
+	                <?php if (isset($post['full_picture']) && $post['full_picture']) : ?>
+		                <a class="sbi_photo"
+		                   href="//facebook.com/AirheadWatersports/posts/<?php echo $postId; ?>"
+		                   target="_blank">
+			                <img src="<?php echo $post['full_picture']; ?>"
+			                     alt="Eatme #test2 #worktoday">
+		                </a>
+	                <?php endif; ?>
+                </div>
+                <div class="sbi_info">
+	                <?php if (isset($post['message']) && $show_caption) : ?>
+                    <p class="sbi_caption_wrap">
+                        <span class="sbi_caption">
+	                        <?php if (strlen($post['message']) > 30) {
+		                        echo substr($post['message'], 0, 30) . ' ...';
+	                        } else {
+		                        echo $post['message'];
+	                        } ?>
+                        </span>
+                    </p>
+					<?php endif; // message ?>
+
+	                <?php if ($show_like || $show_comment) : ?>
+                    <div class="sbi_meta">
+	                    <?php if ($show_like) : ?>
+                        <span class="sbi_likes">
+                            <i class="fa fa-heart"></i><?php echo $likesCount; ?>
+                        </span>
+		                <?php endif; ?>
+	                    <?php if ($show_comment) : ?>
+                        <span class="sbi_comments">
+                            <i class="fa fa-comment"></i><?php echo $commentsCount; ?>
+                        </span>
+						<?php endif; ?>
+                    </div>
+					<?php endif; // $show_like || $show_comment?>
+                </div>
+            </div>
+		<?php endforeach; ?>
+    </div>
+    <?php if($show_btn_follow): ?>
+    <div id="sbf_load">
+        <div class="sbi_follow_btn">
+	        <a href="<?php echo $pageData['link']; ?>" target="_blank">
+		        <i class="fa fa-facebook-official"></i>
+		        <?php echo $btn_follow_label; ?>
+	        </a>
+        </div>
+    </div>
+    <?php endif; ?>
+</div>
+<?php
+    }else{
+echo '<div class="nopost"><h3>No Post Found!</h3></div>';
+}
+?>

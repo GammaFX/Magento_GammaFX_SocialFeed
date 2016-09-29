@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * GammaFX
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the GammaFX.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.gammafx.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category 	GammaFX
+ * @package 	GammaFX_SocialFeed
+ * @copyright 	Copyright (c) 2012 GammaFX (http://www.gammafx.com/)
+ * @license 	http://www.gammafx.com/license-agreement.html
+ */
+-->
+<widgets>
+    <facebook type="fxsocialfeed/facebook" translate="name description">
+        <name>GammaFX SocialFeed Facebook</name>
+        <description>Show photos from Facebook in widget</description>
+        <parameters>
+            <widget_title translate="label">
+                <label>Widget Title</label>
+                <visible>1</visible>
+                <type>text</type>
+            </widget_title>
+            <classes translate="label description">
+                <label>Widget Classes</label>
+                <visible>1</visible>
+                <type>text</type>
+                <description>Custom classes</description>
+            </classes>
+            <width translate="label comment">
+                <label>Width Of Feed</label>
+                <type>text</type>
+                <visible>1</visible>
+                <description>Enter unit(% or px) after the number</description>
+            </width>
+            <height>
+                <label>Height Of Feed</label>
+                <type>text</type>
+                <visible>1</visible>
+                <description>Enter unit(% or px) after the number</description>
+            </height>
+            <background_color translate="label comment">
+                <label>Background color</label>
+                <type>text</type>
+                <visible>1</visible>
+                <description>The color of background, like #f7f7f7</description>
+            </background_color>
+            <num_of_photos>
+                <label>Number Of Photos</label>
+                <type>text</type>
+                <visible>1</visible>
+            </num_of_photos>
+            <column>
+                <label>Number Of Columns</label>
+                <type>text</type>
+                <visible>1</visible>
+            </column>
+            <padding>
+                <label>Padding around images</label>
+                <type>text</type>
+                <visible>1</visible>
+                <description>Enter unit(% or px) after the number</description>
+            </padding>
+            <show_header>
+                <label>Show the Header</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_header>
+            <show_like>
+                <label>Show Likes</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_like>
+            <show_comment>
+                <label>Show Comments</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_comment>
+            <show_caption>
+                <label>Show Caption</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_caption>
+            <show_btn_folow>
+                <label>Show button Folow</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_btn_folow>
+            <btn_folow>
+                <label>Button Follow's title</label>
+                <type>text</type>
+                <visible>1</visible>
+            </btn_folow>
+        </parameters>
+    </facebook>
+    <twitter type="fxsocialfeed/twitter" translate="name description">
+        <name>GammaFX SocialFeed Twitter</name>
+        <description>Show photos from Twitter in widget</description>
+        <parameters>
+            <widget_title translate="label">
+                <label>Widget Title</label>
+                <visible>1</visible>
+                <type>text</type>
+            </widget_title>
+            <classes translate="label description">
+                <label>Widget Classes</label>
+                <visible>1</visible>
+                <type>text</type>
+                <description>Custom classes</description>
+            </classes>
+            <width translate="label comment">
+                <label>Width Of Feed</label>
+                <type>text</type>
+                <visible>1</visible>
+                <description>Enter unit(% or px) after the number</description>
+            </width>
+            <height>
+                <label>Height Of Feed</label>
+                <type>text</type>
+                <visible>1</visible>
+                <description>Enter unit(% or px) after the number</description>
+            </height>
+            <num_of_photos>
+                <label>Number Of Photos</label>
+                <type>text</type>
+                <visible>1</visible>
+            </num_of_photos>
+            <column>
+                <label>Number Of Columns</label>
+                <type>text</type>
+                <visible>1</visible>
+            </column>
+            <padding>
+                <label>Padding around images</label>
+                <type>text</type>
+                <visible>1</visible>
+                <description>Enter unit(% or px) after the number</description>
+            </padding>
+            <show_header>
+                <label>Show the Header</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_header>
+            <show_like>
+                <label>Show Likes</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_like>
+            <show_comment>
+                <label>Show Retweets</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_comment>
+            <show_caption>
+                <label>Show Caption</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_caption>
+            <show_btn_folow>
+                <label>Show button Folow</label>
+                <type>select</type>
+                <source_model>adminhtml/system_config_source_yesno</source_model>
+                <visible>1</visible>
+            </show_btn_folow>
+            <btn_folow>
+                <label>Button Follow's title</label>
+                <type>text</type>
+                <visible>1</visible>
+            </btn_folow>
+        </parameters>
+    </twitter>
+</widgets>

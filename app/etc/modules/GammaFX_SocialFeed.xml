@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author		TypoStores
+ * @copyright	Copyright (c) 2015 TypoStores
+ */
+-->
+<config>
+    <modules>
+        <GammaFX_SocialFeed>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <TypoStores_InstagramFeed />
+            </depends>
+        </GammaFX_SocialFeed>
+    </modules>
+</config>

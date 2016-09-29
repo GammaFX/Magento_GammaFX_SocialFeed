@@ -1,0 +1,109 @@
+<?php
+$title = $this->getData('widget_title');
+$class = $this->getData('classes');
+$width = $this->getData('width');
+if(!strpos($width,'px') && !strpos($width,'%') && $width!='auto') $width = $width . 'px';
+$height = $this->getData('height');
+if(!strpos($height,'px') && !strpos($height,'%') && $height!='auto') $height = $height . 'px';
+$bg_color = $this->getData('background_color');
+$limit = $this->getData('num_of_photos');
+$cols = $this->getData('column');
+$show_header = $this->getData('show_header');
+$padding = $this->getData('padding');
+if(!strpos($padding,'px') && !strpos($padding,'%')) $padding = $padding . 'px';
+$show_btn_follow = $this->getData('show_btn_folow');
+$btn_follow_label = $this->getData('btn_folow');
+$show_like = $this->getData('show_like');
+$show_comment = $this->getData('show_comment');
+$show_caption = $this->getData('show_caption');
+$style = "width : " . $width . ";height : " . $height . ";background-color: " . $bg_color . ";";
+
+$twitter  = $this->setLimit($limit)->initTW();
+$feedData = json_decode($twitter);
+$pageData = (isset($feedData[0])) ? $feedData[0] : null;
+
+if($feedData && $pageData !== null) { ?>
+    <div id="sb_twitter" class="typo-insta <?php echo $class ?> sbi sbi_col_<?php echo $cols;?>" style="<?php echo $style ?>">
+        <?php if(!empty($title)): ?>
+            <div class="title"><h2><?php echo $title;?></h2></div>
+        <?php endif;?>
+        <?php if($show_header) : ?>
+            <div class="sb_twitter_header">
+                <a href="//twitter.com/<?php echo $pageData->user->screen_name; ?>" target="_blank" title="<?php echo $pageData->user->screen_name; ?>" class="sbi_header_link">
+                    <div class="sbi_header_text">
+                        <h3 class="sbi_no_bio"><?php echo $pageData->user->screen_name; ?></h3>
+                    </div>
+                    <?php if (isset($pageData->user->profile_image_url)) : ?>
+                        <div class="sbi_header_img">
+                            <div class="sbi_header_img_hover">
+                                <i class="fa fa-twitter"></i>
+                            </div>
+                            <img src="<?php echo $pageData->user->profile_image_url; ?>" alt="<?php echo $pageData->user->name; ?>" width="50" height="50">
+                        </div>
+                    <?php endif; ?>
+                </a>
+            </div>
+        <?php endif; ?>
+        <div id="sbt_images" style="padding: <?php echo $padding;?>">
+            <?php foreach($feedData as $post) :
+                $likesCount = ($post->favorite_count) ? $post->favorite_count : 0;
+                $retweetCount = ($post->retweet_count) ? $post->retweet_count : 0;
+                ?>
+                <div class="sbi_item sbi_type_image">
+                    <div class="sbi_photo_wrap">
+                        <?php if (isset($post->entities->media[0]->media_url) && $post->entities->media[0]->media_url) : ?>
+                            <a class="sbi_photo"
+                               href="<?php echo $post->entities->media[0]->url; ?>"
+                               target="_blank">
+                                <img src="<?php echo $post->entities->media[0]->media_url; ?>"
+                                     alt="">
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                    <div class="sbi_info">
+                        <?php if (isset($post->text) && $show_caption) : ?>
+                            <p class="sbi_caption_wrap">
+                        <span class="sbi_caption">
+	                        <?php if (strlen($post->text) > 30) {
+                                echo substr($post->text, 0, 30) . ' ...';
+                            } else {
+                                echo $post->text;
+                            } ?>
+                        </span>
+                            </p>
+                        <?php endif; // message ?>
+
+                        <?php if ($show_like || $show_comment) : ?>
+                            <div class="sbi_meta">
+                                <?php if ($show_like) : ?>
+                                    <span class="sbi_likes">
+                            <i class="fa fa-heart"></i><?php echo $likesCount; ?>
+                        </span>
+                                <?php endif; ?>
+                                <?php if ($show_comment) : ?>
+                                    <span class="sbi_comments">
+                            <i class="fa fa-retweet"></i><?php echo $retweetCount; ?>
+                        </span>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; // $show_like || $show_comment?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <?php if($show_btn_follow): ?>
+            <div id="sbt_load">
+                <div class="sbi_follow_btn">
+                    <a href="//twitter.com/<?php echo $pageData->user->screen_name; ?>" target="_blank">
+                        <i class="fa fa-twitter"></i>
+                        <?php echo $btn_follow_label; ?>
+                    </a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+    <?php
+}else{
+    echo '<div class="nopost"><h3>No Post Found!</h3></div>';
+}
+?>

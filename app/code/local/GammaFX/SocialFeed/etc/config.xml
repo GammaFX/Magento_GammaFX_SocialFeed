@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * GammaFX
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the GammaFX.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.gammafx.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category 	GammaFX
+ * @package 	GammaFX_SocialFeed
+ * @copyright 	Copyright (c) 2012 GammaFX (http://www.gammafx.com/)
+ * @license 	http://www.gammafx.com/license-agreement.html
+ */
+-->
+<config>
+    <modules>
+        <GammaFX_SocialFeed>
+            <version>1.0.0</version>
+        </GammaFX_SocialFeed>
+    </modules>
+    <frontend>
+        <routers>
+            <fxsocialfeed>
+                <use>standard</use>
+                <args>
+                    <module>GammaFX_SocialFeed</module>
+                    <frontName>fxsocialfeed</frontName>
+                </args>
+            </fxsocialfeed>
+        </routers>
+        <layout>
+            <updates>
+                <fxsocialfeed>
+                    <file>fxsocialfeed.xml</file>
+                </fxsocialfeed>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+            <fxsocialfeednews>
+                <use>admin</use>
+                <args>
+                    <module>GammaFX_SocialFeed</module>
+                    <frontName>fxsocialfeed</frontName>
+                </args>
+            </fxsocialfeednews>
+        </routers>
+    </admin>
+    <global>
+        <models>
+            <fxsocialfeed>
+                <class>GammaFX_SocialFeed_Model</class>
+            </fxsocialfeed>
+        </models>
+        <blocks>
+            <fxsocialfeed>
+                <class>GammaFX_SocialFeed_Block</class>
+            </fxsocialfeed>
+        </blocks>
+        <helpers>
+            <fxsocialfeed>
+                <class>GammaFX_SocialFeed_Helper</class>
+            </fxsocialfeed>
+        </helpers>
+    </global>
+    <default>
+        <fxsocialfeed>
+            <configure>
+                <token>3042625743.1677ed0.407e58714dc14b19882d3ea2c67b7ded</token>
+                <client_id>aafd45f70bb54d6999811c9655e2b6f7</client_id>
+            </configure>
+        </fxsocialfeed>
+    </default>
+</config>
